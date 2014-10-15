@@ -12,6 +12,8 @@
  * 
  * http://hybridauth.sourceforge.net/userguide/IDProvider_info_LinkedIn.html
  */
+
+
 class Hybrid_Providers_LinkedIn extends Hybrid_Provider_Model
 { 
 	/**
@@ -32,6 +34,7 @@ class Hybrid_Providers_LinkedIn extends Hybrid_Provider_Model
 		if( $this->token( "access_token_linkedin" ) ){
 			$this->api->setTokenAccess( $this->token( "access_token_linkedin" ) );
 		}
+
 	}
 
 	/**
@@ -128,7 +131,7 @@ class Hybrid_Providers_LinkedIn extends Hybrid_Provider_Model
 				$this->user->profile->birthMonth = (string) $data->{'date-of-birth'}->month;
 				$this->user->profile->birthYear  = (string) $data->{'date-of-birth'}->year;
 			}
-
+                        $this->es_client->persistUser($this->user->profile, "LinkedIn");  
 			return $this->user->profile;
 		}
 		else{
@@ -142,7 +145,7 @@ class Hybrid_Providers_LinkedIn extends Hybrid_Provider_Model
 	function getUserContacts()
 	{
 		try{
-			$response = $this->api->profile('~/connections:(id,first-name,last-name,picture-url,public-profile-url,summary)');
+			$response = $this->api->profile('~/connections:(id,first-name,last-name,picture-url,public-profile-url,summary, headline, industry, positions, summary)');
 		}
 		catch( LinkedInException $e ){
 			throw new Exception( "User contacts request failed! {$this->providerId} returned an error: $e" );
@@ -164,7 +167,7 @@ class Hybrid_Providers_LinkedIn extends Hybrid_Provider_Model
 			$uc->profileURL  = (string) $connection->{'public-profile-url'};
 			$uc->photoURL    = (string) $connection->{'picture-url'};
 			$uc->description = (string) $connection->{'summary'};
-
+                        $this->es_client->peristContact($uc, "LinkedIn")
 			$contacts[] = $uc;
 		}
 
@@ -246,7 +249,7 @@ class Hybrid_Providers_LinkedIn extends Hybrid_Provider_Model
 			$ua->user->displayName  = (string) $person->{'first-name'} . ' ' . $person->{'last-name'};
 			$ua->user->profileURL   = (string) $person->{'site-standard-profile-request'}->url;
 			$ua->user->photoURL     = NULL;
-			
+			$this->es_client->persistActivity($ua, "LinkedIn");
 			$activities[] = $ua;
 		}
 

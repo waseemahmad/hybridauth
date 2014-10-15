@@ -18,7 +18,9 @@
     },
     "require": {
         "php": ">=5.2.0",
-        "ext-curl": "*"
+        "ext-curl": "*",
+	"elasticsearch/elasticsearch": "~0.4"
+
     },
     "autoload": {
         "psr-0": {

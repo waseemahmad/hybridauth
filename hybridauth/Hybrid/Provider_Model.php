@@ -19,6 +19,9 @@
  *   Class Hybrid_Provider_Model_OAuth1 for providers that uses the OAuth 1 protocol.
  *   Class Hybrid_Provider_Model_OAuth2 for providers that uses the OAuth 2 protocol.
  */
+
+require_once('ESPersistence.php');
+
 abstract class Hybrid_Provider_Model
 {
 	/**
@@ -58,6 +61,13 @@ abstract class Hybrid_Provider_Model
 	public $api        = NULL; 
 
 	/**
+	 * persistence client (optional) using ElasticSearch
+	 * @var String
+	 */
+	public $es_client        = NULL; 
+
+
+	/**
 	 * Common providers adapter constructor
 	 * @param Numeric/String $providerId
 	 * @param Array $config
@@ -83,8 +93,9 @@ abstract class Hybrid_Provider_Model
 		$this->config = $config;
 
 		// new user instance
-		$this->user = new Hybrid_User();
-		$this->user->providerId = $providerId;
+		$this->user               = new Hybrid_User();
+		$this->user->providerId   = $providerId;
+                $this->es_client          =  new ESPersistence();
 
 		// initialize the current provider adapter
 		$this->initialize(); 
