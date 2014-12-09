@@ -12,6 +12,7 @@ MySpace and Google.
 ## Repository
 
 # Exactle Specific Changes
+(Mostly in following commit : https://github.com/waseemahmad/hybridauth/commit/0a77a6f8cb660d657ec0ca47978d773ba112d5bf )
 
 - **Adds** a Persistence interface to Hybrideauth
 - **Provides** an implementation for ElasticSearch based Persistence
@@ -34,7 +35,7 @@ MySpace and Google.
 
 
 
-HybridAuth repository is made up of several projects:
+# HybridAuth repository is made up of several projects:
 
 - **HybridAuth Core library** includes OpenID, Facebook, Twitter, LinkedIn, Google, Yahoo, Windows Live, Foursquare and AOL.
 - **The additional providers project** contains many others services
