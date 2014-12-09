@@ -1,4 +1,4 @@
-# HybridAuth 2.3.0-dev
+# HybridAuth 2.3.0-dev ( Exactle Fork)
 
 HybridAuth enables developers to easily build social applications and tools 
 to engage websites visitors and customers on a social level by implementing 
@@ -11,12 +11,36 @@ MySpace and Google.
 
 ## Repository
 
+# Exactle Specific Changes
+
+- **Adds** a Persistence interface to Hybrideauth
+- **Provides** an implementation for ElasticSearch based Persistence
+- **Provides** an implementation for RDS(MySQL) based persistence implementation
+
+# Exactle Persistence Interface 
+( https://github.com/waseemahmad/hybridauth/blob/master/hybridauth/Hybrid/PersistenceInterface.php)
+
+- **Interface** to write User Contacts, profile and activity information to a persistent store.
+
+# Elastic Search based Persistence
+(https://github.com/waseemahmad/hybridauth/blob/master/hybridauth/Hybrid/ESPersistence.php)
+
+- **Implements** the persistence interface for Elastic Search using a sniffing connection pool.
+
+# MySQL Based Persistence
+(https://github.com/waseemahmad/hybridauth/blob/master/hybridauth/Hybrid/MySQLPersistence.php)
+
+- **Implements** the persistence interface for MySQL based persistent store.
+
+
+
 HybridAuth repository is made up of several projects:
 
 - **HybridAuth Core library** includes OpenID, Facebook, Twitter, LinkedIn, Google, Yahoo, Windows Live, Foursquare and AOL.
 - **The additional providers project** contains many others services
   which you may want to use,
 - **Examples and demos** contains five examples for you to test, 
+
 
 ## Getting Started
 
